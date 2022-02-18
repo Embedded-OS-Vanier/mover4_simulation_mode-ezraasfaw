@@ -50,6 +50,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/types.h>
+#include "../header/public.h"
 
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
@@ -62,16 +63,21 @@ int main(int argc, char **argv)
 {
 	 /*Ncurse config */
 	init_ncurses();  
+
 	
+	
+
 	/**** rx-tx CAN init ***********/
 #ifndef _WIN32
 	open_socket(); // CAN socket init
 #endif
 	
 	startTasksControllerRx();// combined tasks pTask_Controller and pTask_Rx
-
+	create_thread_kb();
+	create_thread_display();
 	pthread_joinControllerRx();  
-
+	pthread_join_kb();
+	pthread_join_display();
 	close_files();
 
     exit(EXIT_SUCCESS);
