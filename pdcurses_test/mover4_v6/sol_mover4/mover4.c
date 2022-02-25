@@ -17,7 +17,7 @@
 *	Serge Hould			24 Dec 2020		v3.0.2	add call to close_files()
 *	Serge Hould			15 Jan 2021		v3.0.2	add call init_ncurses()
 *
-*		
+*
 *
  *		Bitrate should be 500000 for Mover4
  *		Command to copile:
@@ -59,26 +59,26 @@
 
 
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-	 /*Ncurse config */
-	init_ncurses();  
+	/*Ncurse config */
+	init_ncurses();
 
-	
-	
+
+
 
 	/**** rx-tx CAN init ***********/
 #ifndef _WIN32
 	open_socket(); // CAN socket init
 #endif
-	
+
 	startTasksControllerRx();// combined tasks pTask_Controller and pTask_Rx
 	create_thread_kb();
 	create_thread_display();
-	pthread_joinControllerRx();  
+	pthread_joinControllerRx();
 	pthread_join_kb();
 	pthread_join_display();
 	close_files();
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

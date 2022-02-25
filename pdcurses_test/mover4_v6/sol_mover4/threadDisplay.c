@@ -3,13 +3,16 @@
 *
 *	Author				Date			Version
 *   Ezra-Fikru Asfaw    1/28/2022        1.0      Worked and completed the menu
-* 
-*	Ezra-Fikru Asfaw    2/04/2022        2.0      Worked and completed snake 
+*
+*	Ezra-Fikru Asfaw    2/04/2022        2.0      Worked and completed snake
 *                                                 mouvement
-*                                                  
+*
 *	Ezra-Fikru Asfaw    2/11/2022        3.0      Completed threadDisplay.c
 *                                                 Worked on the counter, and
 *                                                 blinking the title of the game.
+* 
+*	Ezra-Fikru Asfaw    2/11/2022        4.0      modified threadDisplay.c to work 
+*                                                 with the robot arm.
 *****************************************************************************/
 
 
@@ -58,13 +61,13 @@ void print(int row, int col, char* str) {
 void* thread_display(void* threadid) {
     //static menu section
     attron(WHITE_BLACK);
-    mvprintw(0, 0,"******************************************************************************");
-    mvprintw(1, 0,"                                *Controls*                                    ");
-    mvprintw(1, 0,"                *q         w        e       r       t *                       ");
-    mvprintw(2, 0,"              *Joint1   Joint2   Joint3   Joint4  Gripper *                   ");
-    mvprintw(3, 0,"                *a         s        d       f       g *                       ");
-    mvprintw(4, 0,"                                *Exit: x*                                     ");
-    mvprintw(5, 0,"******************************************************************************");
+    mvprintw(0, 0, "******************************************************************************");
+    mvprintw(1, 0, "                                *Controls*                                    ");
+    mvprintw(1, 0, "                *q         w        e       r       t *                       ");
+    mvprintw(2, 0, "              *Joint1   Joint2   Joint3   Joint4  Gripper *                   ");
+    mvprintw(3, 0, "                *a         s        d       f       g *                       ");
+    mvprintw(4, 0, "                                *Exit: x*                                     ");
+    mvprintw(5, 0, "******************************************************************************");
     attroff(WHITE_BLACK);
 
 
@@ -75,7 +78,7 @@ void* thread_display(void* threadid) {
         mvprintw(7, 0, "Base: %3.2f                                                                    ", get_sp_angle(0));
         mvprintw(8, 0, "Shoulder: %3.2f                                                                ", get_sp_angle(1));
         mvprintw(9, 0, "Elbow: %3.2f                                                                   ", get_sp_angle(2));
-        mvprintw(10, 0,"Wrist: %3.2f                                                                   ", get_sp_angle(3));
+        mvprintw(10, 0, "Wrist: %3.2f                                                                   ", get_sp_angle(3));
         mvprintw(11, 0, "******************************************************************************");
         attroff(GREEN_BLACK);
 
@@ -93,8 +96,8 @@ void* thread_display(void* threadid) {
         attroff(RED_BLACK);
 
         attron(RED_WHITE);
-        print_warnings(19,0);
-        print_errors(20,0);
+        print_warnings(19, 0);
+        print_errors(20, 0);
         attroff(RED_WHITE);
 
         attron(RED_BLACK);
