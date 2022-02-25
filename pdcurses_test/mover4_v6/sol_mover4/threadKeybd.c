@@ -75,7 +75,7 @@ static void* thread_kd(void* threadid) {     //retive keyboard input
         else if (input == 'f') set_sp_angle(3, --temp_wrt); // decrements angle of Wrist
 
         else if (input == 't') set_gripper(GRIP_OPEN); //Enable and open gripper
-        else if (input == 'g') set_gripper(GRIP_CLOSE);  //Disable and close gripper
+        else if (input == 'g') set_gripper(GRIP_CLOSE);  //Enable and close gripper
 
         else if (input == 'x') exit(1);
     }
