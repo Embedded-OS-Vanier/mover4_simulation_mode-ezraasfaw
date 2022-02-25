@@ -52,32 +52,43 @@ static void* thread_kd(void* threadid);
 static pthread_t thread1;
 static pthread_mutex_t mutex_xy = PTHREAD_MUTEX_INITIALIZER;
 
-static void* thread_kd(void* threadid) {     //retive keyboard input
-    int temp_bse = 0, temp_shl = 0, temp_elb = 0, temp_wrt = 0, input;
+static void* thread_kd(void* threadid) {     // Retrieve keyboard input
+
+    int temp_bse = 0, temp_shl = 0, temp_elb = 0, temp_wrt = 0;
+    int input;
+
     while (1) {
-        input = getch();  // blocking queue 
+        input = getch();  // Blocking queue 
         delay_ms(20);
         temp_bse = get_sp_angle(0);
         temp_shl = get_sp_angle(1);
         temp_elb = get_sp_angle(2);
         temp_wrt = get_sp_angle(3);
 
-        if (input == 'q') set_sp_angle(0, ++temp_bse); // increments angle of Base
-        else if (input == 'a') set_sp_angle(0, --temp_bse); // decrements angle of Base
+        if (input == 'q') set_sp_angle(0, ++temp_bse); // Increments angle of Base
+        else if (input == 'a') set_sp_angle(0, --temp_bse); // Decrements angle of Base
 
-        else if (input == 'w') set_sp_angle(1, ++temp_shl); // increments angle of Shoulder
-        else if (input == 's') set_sp_angle(1, --temp_shl); // decrements angle of Shoulder
+        else if (input == 'w') set_sp_angle(1, ++temp_shl); // Increments angle of Shoulder
+        else if (input == 's') set_sp_angle(1, --temp_shl); // Decrements angle of Shoulder
 
-        else if (input == 'e') set_sp_angle(2, --temp_elb); // increments angle of Elbow
-        else if (input == 'd') set_sp_angle(2, ++temp_elb); // decrements angle of Elbow
+        else if (input == 'e') set_sp_angle(2, --temp_elb); // Increments angle of Elbow
+        else if (input == 'd') set_sp_angle(2, ++temp_elb); // Decrements angle of Elbow
 
-        else if (input == 'r') set_sp_angle(3, --temp_wrt); // increments angle of Wrist
-        else if (input == 'f') set_sp_angle(3, --temp_wrt); // decrements angle of Wrist
+        else if (input == 'r') set_sp_angle(3, --temp_wrt); // Increments angle of Wrist
+        else if (input == 'f') set_sp_angle(3, --temp_wrt); // Decrements angle of Wrist
 
-        else if (input == 't') set_gripper(GRIP_OPEN); //Enable and open gripper
-        else if (input == 'g') set_gripper(GRIP_CLOSE);  //Enable and close gripper
+        else if (input == 't') set_gripper(GRIP_OPEN); // Enable and open gripper
+        else if (input == 'g') set_gripper(GRIP_CLOSE);  // Enable and close gripper
 
-        else if (input == 'x') exit(1);
+        else if (input == 'j') {
+            pthread_cancel_auto();
+        }
+
+        else if (input == 'n') {
+            create_thread_auto();
+        }
+
+        else if (input == 'x') exit(1); // Exit
     }
     return NULL;
 

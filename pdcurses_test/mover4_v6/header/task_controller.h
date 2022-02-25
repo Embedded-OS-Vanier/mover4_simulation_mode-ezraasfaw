@@ -1,16 +1,16 @@
- /*
- *	File: task_controller.h
- * 		Move all prototypes and macros pertaining to task_controller from public.h into task_controller.h
- *		public.h now contains only public prototypes exlcuding task_controller
- *
- *	Author				Date			Version
- *	Serge Hould			24 Dec 2020		1.0.0		Creates task_controller.h. Split public.h
- *													Add error setter-getter print
- *	Serge Hould			24 Dec 2020		1.0.1		add void close_files(void)
- *	Serge Hould			8 June 2021		1.0.2		acceleration, speed
- *	Serge Hould			8 June 2021		1.0.3		add  set_accel() and associated macros
- * 
- */
+/*
+*	File: task_controller.h
+* 		Move all prototypes and macros pertaining to task_controller from public.h into task_controller.h
+*		public.h now contains only public prototypes exlcuding task_controller
+*
+*	Author				Date			Version
+*	Serge Hould			24 Dec 2020		1.0.0		Creates task_controller.h. Split public.h
+*													Add error setter-getter print
+*	Serge Hould			24 Dec 2020		1.0.1		add void close_files(void)
+*	Serge Hould			8 June 2021		1.0.2		acceleration, speed
+*	Serge Hould			8 June 2021		1.0.3		add  set_accel() and associated macros
+*
+*/
 
 #ifndef TASK_CONTROLLER_H
 #define TASK_CONTROLLER_H
@@ -25,11 +25,11 @@
 #define	GRIP_CLOSE	0x02
 #define	GRIP_OPEN	0x03
 
- /*		Acceleration-deceleration parameters															*/
- /* ACCEL_DECEL represents the acceleration and deceleration.  The higher ACCEL_DECEL is, the higher the acceleration-deceleration */
- /* SPEED_MAX represents the maximum speed.  This is when the acceleration stops and the speed is constant */
- /* SPEED_MIN represents the minimum speed. This is when the deleration stops and the speed is constant	*/
- /* SLOW_DEGREE is the angle difference when the deceleraton starts										*/
+/*		Acceleration-deceleration parameters															*/
+/* ACCEL_DECEL represents the acceleration and deceleration.  The higher ACCEL_DECEL is, the higher the acceleration-deceleration */
+/* SPEED_MAX represents the maximum speed.  This is when the acceleration stops and the speed is constant */
+/* SPEED_MIN represents the minimum speed. This is when the deleration stops and the speed is constant	*/
+/* SLOW_DEGREE is the angle difference when the deceleraton starts										*/
 //#define 	ACCEL_DECEL	0.1		// decrease of the step at each loop 
 #define 	ACCEL_DECEL	0.4		// high acceleration-deceleration
 //#define 	ACCEL_DECEL	10		// too much acceleration-deceleration - overcurrent
@@ -63,7 +63,7 @@ typedef struct
 
 /*Prototype Area*/
 int get_keyb_f(int s);
-void set_keyb_f(int , int);
+void set_keyb_f(int, int);
 void set_gripper(int val);
 int get_gripper(void);
 //kin_f get_pv_angles(void);
@@ -86,7 +86,7 @@ void startTasksControllerRx(void);
 void pthread_joinControllerRx(void);
 void delay_ms(int);
 void set_warnings(char* str);
-int get_warnings(char* str); 
+int get_warnings(char* str);
 void init_files(void);
 void print_warnings(int v, int h);
 void set_errors(char* str);

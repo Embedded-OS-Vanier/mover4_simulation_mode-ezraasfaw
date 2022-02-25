@@ -58,15 +58,15 @@ void print(int row, int col, char* str) {
 
 }
 
-void* thread_display(void* threadid) {
+static void* thread_display(void* threadid) {
     //static menu section
     attron(WHITE_BLACK);
     mvprintw(0, 0, "******************************************************************************");
     mvprintw(1, 0, "                                *Controls*                                    ");
-    mvprintw(1, 0, "                *q         w        e       r       t *                       ");
-    mvprintw(2, 0, "              *Joint1   Joint2   Joint3   Joint4  Gripper *                   ");
-    mvprintw(3, 0, "                *a         s        d       f       g *                       ");
-    mvprintw(4, 0, "                                *Exit: x*                                     ");
+    mvprintw(1, 0, "                *q         w        e       r       t*                        ");
+    mvprintw(2, 0, "              *Joint1   Joint2   Joint3   Joint4  Gripper*                    ");
+    mvprintw(3, 0, "                *a         s        d       f       g*                        ");
+    mvprintw(4, 0, "                  *Exit: x - Jog mode: j - Auto mode: n*                      ");
     mvprintw(5, 0, "******************************************************************************");
     attroff(WHITE_BLACK);
 
@@ -74,7 +74,7 @@ void* thread_display(void* threadid) {
     while (1) {
         delay_ms(20);
         attron(GREEN_BLACK);
-        mvprintw(6, 0, "*************************************SP***************************************");
+        print(6, 0, "*************************************SP***************************************");
         mvprintw(7, 0, "Base: %3.2f                                                                    ", get_sp_angle(0));
         mvprintw(8, 0, "Shoulder: %3.2f                                                                ", get_sp_angle(1));
         mvprintw(9, 0, "Elbow: %3.2f                                                                   ", get_sp_angle(2));
