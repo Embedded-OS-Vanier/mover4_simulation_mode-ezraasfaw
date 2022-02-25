@@ -19,6 +19,13 @@ void create_thread_display(void);
 void pthread_join_display(void);
 void create_thread_kb(void);
 void pthread_join_kb(void);
+void create_thread_auto(void);
+//void pthread_join_auto(void);
+void pthread_cancel_auto(void);
+
+
 static void* thread_kd(void* threadid);
 static void* thread_display(void* threadid);
+
+//static void* thread_auto(void* threadid)
 #endif
