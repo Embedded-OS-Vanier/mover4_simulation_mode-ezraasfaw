@@ -10,9 +10,15 @@
 *	Ezra-Fikru Asfaw    2/11/2022        3.0      Completed threadDisplay.c
 *                                                 Worked on the counter, and
 *                                                 blinking the title of the game.
-* 
-*	Ezra-Fikru Asfaw    2/11/2022        4.0      modified threadDisplay.c to work 
+*
+*	Ezra-Fikru Asfaw    2/18/2022        4.0      modified threadDisplay.c to work
 *                                                 with the robot arm.
+*
+*	Ezra-Fikru Asfaw    2/25/2022        5.0      Completed threadKeybd.c and threadDisplay.c
+*                                                 for manual mode.
+*
+*	Ezra-Fikru Asfaw    3/4/2022         6.0      Completed main function of taskAuto.c.
+*                                                 Need to fix auto/manual printing state.
 *****************************************************************************/
 
 
@@ -49,12 +55,21 @@ int cnt;
 static void* thread_display(void* threadid);
 static pthread_t thread2;
 static pthread_mutex_t mutex_print = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t mutex_str = PTHREAD_MUTEX_INITIALIZER;
 
-void print(int row, int col, char* str) {
+void print(int row, int col, char* str, int value) {
 
     pthread_mutex_lock(&mutex_print);
-    mvprintw(row, col, str);  // this resource is protected by a mutex
+    mvprintw(row, col, str, value);  // this resource is protected by a mutex
     pthread_mutex_unlock(&mutex_print);
+
+}
+
+void printstr(int row, int col, char* str) {
+
+    pthread_mutex_lock(&mutex_str);
+    mvprintw(row, col, str);  // this resource is protected by a mutex
+    pthread_mutex_unlock(&mutex_str);
 
 }
 
@@ -74,7 +89,8 @@ static void* thread_display(void* threadid) {
     while (1) {
         delay_ms(20);
         attron(GREEN_BLACK);
-        print(6, 0, "*************************************SP***************************************");
+
+        mvprintw(6, 0, "*************************************SP***************************************");
         mvprintw(7, 0, "Base: %3.2f                                                                    ", get_sp_angle(0));
         mvprintw(8, 0, "Shoulder: %3.2f                                                                ", get_sp_angle(1));
         mvprintw(9, 0, "Elbow: %3.2f                                                                   ", get_sp_angle(2));

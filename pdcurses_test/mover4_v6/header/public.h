@@ -13,14 +13,16 @@
 /*macros*/
 
 /*Prototype Area*/
-
-void print(int row, int col, char* str);
+void printstr(int row, int col, char* str);
+void print(int row, int col, char* str,int value);
+void angleZero(void);
+void anglePosition1(int gripint, int gripfinal);
+void anglePosition2(int gripint, int gripfinal);
 void create_thread_display(void);
 void pthread_join_display(void);
 void create_thread_kb(void);
 void pthread_join_kb(void);
 void create_thread_auto(void);
-//void pthread_join_auto(void);
 void pthread_cancel_auto(void);
 
 

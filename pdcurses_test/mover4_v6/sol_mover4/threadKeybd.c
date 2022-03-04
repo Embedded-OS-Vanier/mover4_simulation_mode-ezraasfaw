@@ -2,18 +2,23 @@
 *
 *
 *	Author				Date			Version
-*   Ezra-Fikru Asfaw    1/28/2022        1.0      Worked and completed the ability.
-*                                                 to retive the key input to move the
-*                                                 snake.
+*   Ezra-Fikru Asfaw    1/28/2022        1.0      Worked and completed the menu
 *
-*	Ezra-Fikru Asfaw    2/04/2022        2.0      Worked and completed the ability to send
-*                                                 the keyboard input to threadKeybd.c.
+*	Ezra-Fikru Asfaw    2/04/2022        2.0      Worked and completed snake
+*                                                 mouvement
 *
-*	Ezra-Fikru Asfaw    2/11/2022        3.0      Completed threadKeybd.c
-*                                                 Worked and completed the borders.
-* 
-*	Ezra-Fikru Asfaw    2/11/2022        4.0      modified threadKeybd.c to work 
+*	Ezra-Fikru Asfaw    2/11/2022        3.0      Completed threadDisplay.c
+*                                                 Worked on the counter, and
+*                                                 blinking the title of the game.
+*
+*	Ezra-Fikru Asfaw    2/18/2022        4.0      modified threadDisplay.c to work
 *                                                 with the robot arm.
+*
+*	Ezra-Fikru Asfaw    2/25/2022        5.0      Completed threadKeybd.c and threadDisplay.c
+*                                                 for manual mode.
+*
+*	Ezra-Fikru Asfaw    3/4/2022         6.0      Completed main function of taskAuto.c.
+*                                                 Need to fix auto/manual printing state.
 *****************************************************************************/
 
 
@@ -46,8 +51,6 @@
 #include <pthread.h>
 
 /*Globals*/
-static int x = 7;
-static int y = 0;
 static void* thread_kd(void* threadid);
 static pthread_t thread1;
 static pthread_mutex_t mutex_xy = PTHREAD_MUTEX_INITIALIZER;
@@ -80,7 +83,8 @@ static void* thread_kd(void* threadid) {     // Retrieve keyboard input
         else if (input == 't') set_gripper(GRIP_OPEN); // Enable and open gripper
         else if (input == 'g') set_gripper(GRIP_CLOSE);  // Enable and close gripper
 
-        else if (input == 'j') {
+        else if (input == 'j') { 
+            mvprintw(22, 0, "************************************MANUAL************************************");
             pthread_cancel_auto();
         }
 
