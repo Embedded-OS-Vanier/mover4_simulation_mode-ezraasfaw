@@ -117,8 +117,8 @@ void angleZero(void) {
 
 void anglePosition1(int gripint, int gripfinal) {
     set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, 79); // Set angle of Base
     set_sp_angle(1, 60); // Set angle of Shoulder
+    set_sp_angle(0, 79); // Set angle of Base
     set_sp_angle(2, 79); // Set angle of Elbow
     set_sp_angle(3, -53); // Set angle of Wrist
     delay_ms(DELAY_GRIP);
@@ -129,8 +129,8 @@ void anglePosition1(int gripint, int gripfinal) {
 
 void anglePosition2(int gripint, int gripfinal) {
     set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, -9); // Set angle of Base
     set_sp_angle(1, 65); // Set angle of Shoulder
+    set_sp_angle(0, -9); // Set angle of Base
     set_sp_angle(2, 57); // Set angle of Elbow
     set_sp_angle(3, -26); // Set angle of Wrist
     delay_ms(DELAY_GRIP);
