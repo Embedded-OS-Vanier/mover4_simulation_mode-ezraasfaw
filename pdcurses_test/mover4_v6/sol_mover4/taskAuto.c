@@ -45,6 +45,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include "../header/adc.h"
+#include <math.h>
 
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
@@ -56,6 +57,21 @@
 #define DISTANCE 10
 #define DELAY 10000
 #define DELAY_GRIP 1000
+#define ERROR 3
+
+#define ZERO 0
+
+#define BASE1 79
+#define SHLD1 60
+#define ELBW1 79
+#define WRST1 -53
+
+
+#define BASE2 -9
+#define SHLD2 65
+#define ELBW2 57
+#define WRST2 -26
+
 #define SIMULATION
 static void* thread_auto(void* threadid);
 static pthread_t thread3;
@@ -75,21 +91,21 @@ static void* thread_auto(void* threadid) {
         mvprintw(22, 0, "************************************AUTO**************************************");
 
         #ifdef SIMULATION
-        sensor = 2001;
+            sensor = 2001;
         #endif // SIMULATION
      
         #ifndef SIMULATION
-        sensor = readADC(5); // reads the sensor at pin 5
+            sensor = readADC(5); // reads the sensor at pin 5
         #endif // !SIMULATION
 
-        
+
         distance = (DISTANCE * sensor) / 4095;
 
         if (sensor >= 2000) {
+            angleZero(ZERO);
             anglePosition1(GRIP_OPEN, GRIP_CLOSE);
-            angleZero();
+            angleZero(ZERO);
             anglePosition2(GRIP_CLOSE, GRIP_OPEN);
-
 
         }
 
@@ -99,44 +115,79 @@ static void* thread_auto(void* threadid) {
             anglePosition1(GRIP_CLOSE, GRIP_OPEN);
 
         }*/
-        else {
-            angleZero();
-        }
+       /* else {
+            angleZero(ZERO);
+        }*/
         return NULL;
 
     }
     
 }
-void angleZero(void) {
-    set_sp_angle(1, 0); //  Angle of Shoulder set to 0
-    set_sp_angle(2, 0); //  Angle of Elbow set to 0
-    set_sp_angle(3, 0); //  Angle of Wrist set to 0
-    delay_ms(DELAY);
+
+void angleZero(int ang) {
+    set_sp_angle(0, ang); // Set angle of Base
+    set_sp_angle(1, ang); //  Angle of Shoulder set to 0
+    set_sp_angle(2, ang); //  Angle of Elbow set to 0
+    set_sp_angle(3, ang); //  Angle of Wrist set to 0
+    move_until(ang, ang, ang, ang);
 }
 
 
 void anglePosition1(int gripint, int gripfinal) {
     set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, 79); // Set angle of Base
-    set_sp_angle(1, 60); // Set angle of Shoulder
-    set_sp_angle(2, 79); // Set angle of Elbow
-    set_sp_angle(3, -53); // Set angle of Wrist
-    delay_ms(DELAY_GRIP);
+    set_sp_angle(0, BASE1); // Set angle of Base
+    set_sp_angle(1, SHLD1); // Set angle of Shoulder
+    set_sp_angle(2, ELBW1); // Set angle of Elbow
+    set_sp_angle(3, WRST1); // Set angle of Wrist
     set_gripper(gripfinal);  // Final state of the gripper
-    delay_ms(DELAY);
+    move_until(BASE1, SHLD1, ELBW1, WRST1);
 }
 
 
 void anglePosition2(int gripint, int gripfinal) {
     set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, -9); // Set angle of Base
-    set_sp_angle(1, 65); // Set angle of Shoulder
-    set_sp_angle(2, 57); // Set angle of Elbow
-    set_sp_angle(3, -26); // Set angle of Wrist
-    delay_ms(DELAY_GRIP);
+    set_sp_angle(0, BASE2); // Set angle of Base
+    set_sp_angle(1, SHLD2); // Set angle of Shoulder
+    set_sp_angle(2, ELBW2); // Set angle of Elbow
+    set_sp_angle(3, WRST2); // Set angle of Wrist
     set_gripper(gripfinal);  // Final state of the gripper
-    delay_ms(DELAY);
+    move_until(BASE2, SHLD2, ELBW2, WRST2);
 }
+
+void move_until(double base, double shld, double elbow, double wrist) {
+    int error[10];
+
+
+    while (1) {
+
+        error[0] = get_curr_angle(0) - base;
+        error[1] = get_curr_angle(1) - shld;
+        error[2] = get_curr_angle(2) - elbow;
+        error[3] = get_curr_angle(3) - wrist;
+        
+        
+        
+       
+            if ((fabs(error[0]) <= ERROR) && (fabs(error[1]) <= ERROR) && (fabs(error[2]) <= ERROR) && (fabs(error[3]) <= ERROR)){
+                
+                printstr(23, 0, "************************************DELAYS************************************");
+                break;
+
+            }
+            /*else {
+                mvprintw(23, 0, "                                                                               ");
+            
+            }*/
+
+            delay_ms(3);
+        
+        
+        }
+        
+    
+    
+    }
+    
 
 void create_thread_auto(void) {
     pthread_create(&thread3, NULL, thread_auto, NULL);

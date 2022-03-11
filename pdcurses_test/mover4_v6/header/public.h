@@ -15,9 +15,10 @@
 /*Prototype Area*/
 void printstr(int row, int col, char* str);
 void print(int row, int col, char* str,int value);
-void angleZero(void);
+void angleZero(int ang);
 void anglePosition1(int gripint, int gripfinal);
 void anglePosition2(int gripint, int gripfinal);
+void move_until(double base, double shld, double elbow, double wrist);
 void create_thread_display(void);
 void pthread_join_display(void);
 void create_thread_kb(void);
