@@ -20,7 +20,7 @@
 *	Ezra-Fikru Asfaw    3/4/2022         6.0      Completed main function of taskAuto.c.
 *                                                 Need to fix auto/manual printing state.
 *****************************************************************************/
-
+//
 
 #ifdef _WIN32
 #include <Windows.h>
