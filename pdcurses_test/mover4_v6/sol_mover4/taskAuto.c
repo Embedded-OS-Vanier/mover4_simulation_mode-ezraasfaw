@@ -47,6 +47,7 @@
 #include "../header/adc.h"
 #include <math.h>
 
+
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
 #endif
@@ -89,6 +90,7 @@ static void* thread_auto(void* threadid) {
     while (1) {
         delay_ms(20);
         mvprintw(22, 0, "************************************AUTO**************************************");
+
 
         #ifdef SIMULATION
             sensor = 2001;
@@ -184,7 +186,6 @@ void move_until(double base, double shld, double elbow, double wrist) {
         
         }
         
-    
     
     }
     

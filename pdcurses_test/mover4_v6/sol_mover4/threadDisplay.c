@@ -44,6 +44,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/types.h>
+#include "../header/kinematic.h"
 
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
@@ -75,6 +76,15 @@ void printstr(int row, int col, char* str) {
 
 static void* thread_display(void* threadid) {
     //static menu section
+    #include "../header/kinematic.h"
+
+    kin_f angles = to_angle(-5, 10, 23, 10);
+    mvprintw(23, 0, "A0: %3f        1: %3f     2: %3f     3: %3f                            ", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
+
+    kin_i cart = to_cart(116.56, 10.96, 18.41, 60.62);
+    mvprintw(24, 0, "C0: %3f        1: %3f     2: %3f     3: %3f                            ", cart.data[0], cart.data[1], cart.data[2], cart.data[3]);
+
+
     attron(WHITE_BLACK);
     mvprintw(0, 0, "******************************************************************************");
     mvprintw(1, 0, "                                *Controls*                                    ");
