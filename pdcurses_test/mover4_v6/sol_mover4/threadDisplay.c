@@ -78,20 +78,23 @@ static void* thread_display(void* threadid) {
     //static menu section
     #include "../header/kinematic.h"
 
-    kin_f angles = to_angle(-5, 10, 23, 10);
-    mvprintw(23, 0, "A0: %3f        1: %3f     2: %3f     3: %3f                            ", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
 
-    kin_i cart = to_cart(116.56, 10.96, 18.41, 60.62);
-    mvprintw(24, 0, "C0: %3f        1: %3f     2: %3f     3: %3f                            ", cart.data[0], cart.data[1], cart.data[2], cart.data[3]);
+    //kin_f angles = to_angle(-5, 10, 23, 10);
+    //mvprintw(23, 0, "A0: %.2f        1: %.2f     2: %.2f     3: %.2f                            ", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
+
+  /*  kin_i cart = to_cart(116.56, 10.96, 18.41, 60.62);
+    mvprintw(24, 0, "C0: %.2f        1: %.2f     2: %.2f     3: %.2f                            ", cart.data[0], cart.data[1], cart.data[2], cart.data[3]);*/
+
+
 
 
     attron(WHITE_BLACK);
     mvprintw(0, 0, "******************************************************************************");
-    mvprintw(1, 0, "                                *Controls*                                    ");
+    mvprintw(1, 0, "            * Use the following keys to jog the joints or grip *              ");
     mvprintw(1, 0, "                *q         w        e       r       t*                        ");
     mvprintw(2, 0, "              *Joint1   Joint2   Joint3   Joint4  Gripper*                    ");
     mvprintw(3, 0, "                *a         s        d       f       g*                        ");
-    mvprintw(4, 0, "                  *Exit: x - Jog mode: j - Auto mode: n*                      ");
+    mvprintw(4, 0, "         *Exit: x - Jog mode: j - Auto mode: n - Kinematics mode : k *        ");
     mvprintw(5, 0, "******************************************************************************");
     attroff(WHITE_BLACK);
 

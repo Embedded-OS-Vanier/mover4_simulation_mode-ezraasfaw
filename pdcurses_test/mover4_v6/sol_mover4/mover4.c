@@ -51,6 +51,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include "../header/public.h"
+#include "../header/kinematic.h"
 
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
@@ -78,6 +79,14 @@ int main(int argc, char** argv)
 	pthread_joinControllerRx();
 	pthread_join_kb();
 	pthread_join_display();
+	/*kin_f angles = to_angle(-5.0, 10.0, 23.0, 1);
+	attron(WHITE_BLACK);
+	mvprintw(23, 0, "A0: %.2f | 1: %.2f | 2: %.2f | 3: %.2f", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
+	attroff(WHITE_BLACK);
+	refresh();*/
+
+
+	
 	close_files();
 
 	exit(EXIT_SUCCESS);

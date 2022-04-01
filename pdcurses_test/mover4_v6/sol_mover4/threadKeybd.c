@@ -91,7 +91,10 @@ static void* thread_kd(void* threadid) {     // Retrieve keyboard input
         else if (input == 'n') {
             create_thread_auto();
         }
-
+        else if (input == 'k') {
+            mvprintw(22, 0, "************************************invKey************************************");
+            create_thread_invkey();
+        }
         else if (input == 'x') exit(1); // Exit
     }
     return NULL;

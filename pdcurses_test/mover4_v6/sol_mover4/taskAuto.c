@@ -157,20 +157,26 @@ void anglePosition2(int gripint, int gripfinal) {
 }
 
 void move_until(double base, double shld, double elbow, double wrist) {
-    int error[10];
+    double error[10];
+    double error_base, error_shld, error_elb, error_wrt;
+
+    set_sp_angle(0, base); // Set angle of Base
+    set_sp_angle(1, shld); // Set angle of Shoulder
+    set_sp_angle(2, elbow); // Set angle of Elbow
+    set_sp_angle(3, wrist); // Set angle of Wrist
 
 
     while (1) {
 
-        error[0] = get_curr_angle(0) - base;
-        error[1] = get_curr_angle(1) - shld;
-        error[2] = get_curr_angle(2) - elbow;
-        error[3] = get_curr_angle(3) - wrist;
+        error_base = get_curr_angle(0) - base;
+        error_shld = get_curr_angle(1) - shld;
+        error_elb = get_curr_angle(2) - elbow;
+        error_wrt = get_curr_angle(3) - wrist;
         
         
         
        
-            if ((fabs(error[0]) <= ERROR) && (fabs(error[1]) <= ERROR) && (fabs(error[2]) <= ERROR) && (fabs(error[3]) <= ERROR)){
+            if ((fabs(error_base) <= ERROR) && (fabs(error_shld) <= ERROR) && (fabs(error_elb) <= ERROR) && (fabs(error_wrt) <= ERROR)){
                 
                 printstr(23, 0, "************************************DELAYS************************************");
                 break;
