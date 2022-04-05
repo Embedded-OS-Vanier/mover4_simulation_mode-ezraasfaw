@@ -124,7 +124,8 @@ void circle_yz_plane(void) {
 	double test;
 	double y, z;
 
-
+the while loop belongs to the thread. Don't implement it here!
+	
 	while (1) {
 
 
