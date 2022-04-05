@@ -105,9 +105,16 @@ static void* thread_auto(void* threadid) {
 
         if (sensor >= 2000) {
             angleZero(ZERO);
-            anglePosition1(GRIP_OPEN, GRIP_CLOSE);
+            //anglePosition1(GRIP_OPEN, GRIP_CLOSE);
+            set_gripper(GRIP_OPEN); // Intial state of the gripper
+            move_until(BASE1, SHLD1, ELBW1, WRST1);
+            set_gripper(GRIP_CLOSE); // Finale state of the gripper
+
             angleZero(ZERO);
-            anglePosition2(GRIP_CLOSE, GRIP_OPEN);
+            //anglePosition2(GRIP_CLOSE, GRIP_OPEN);
+            set_gripper(GRIP_CLOSE);
+            move_until(BASE2, SHLD2, ELBW2, WRST2);
+            set_gripper(GRIP_OPEN);
 
         }
 
