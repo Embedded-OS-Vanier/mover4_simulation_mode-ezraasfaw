@@ -1,8 +1,8 @@
 #pragma once
-#define BASE_HGT_A 	8.11//8.625      //base height   
-#define HUMERUS_A 	7.48//7.375      //shoulder-to-elbow "bone" 
-#define ULNA_A		8.66//8.625      //elbow-to-wrist "bone" 
-#define GRIPPER_A		5.51//6           //gripper
+#define BASE_HGT 	8.625      //base height   
+#define HUMERUS 	7.375      //shoulder-to-elbow "bone" 
+#define ULNA		8.625      //elbow-to-wrist "bone" 
+#define GRIPPER		6           //gripper
 
 #define PI 3.14159265358979323846
 
