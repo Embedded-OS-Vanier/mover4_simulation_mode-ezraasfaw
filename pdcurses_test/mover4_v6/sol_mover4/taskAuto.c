@@ -54,24 +54,7 @@
 #include <pthread.h>
 
 /*Globals*/
-#define ADC 5
-#define DISTANCE 10
-#define DELAY 10000
-#define DELAY_GRIP 1000
-#define ERROR 3
 
-#define ZERO 0
-
-#define BASE1 79
-#define SHLD1 60
-#define ELBW1 79
-#define WRST1 -53
-
-
-#define BASE2 -9
-#define SHLD2 65
-#define ELBW2 57
-#define WRST2 -26
 
 #define SIMULATION
 static void* thread_auto(void* threadid);
@@ -164,7 +147,7 @@ void anglePosition2(int gripint, int gripfinal) {
 }
 
 void move_until(double base, double shld, double elbow, double wrist) {
-    double error[10];
+
     double error_base, error_shld, error_elb, error_wrt;
 
     set_sp_angle(0, base); // Set angle of Base
@@ -189,12 +172,9 @@ void move_until(double base, double shld, double elbow, double wrist) {
                 break;
 
             }
-            /*else {
-                mvprintw(23, 0, "                                                                               ");
-            
-            }*/
 
-            delay_ms(3);
+
+            delay_ms(20);
         
         
         }
@@ -210,5 +190,11 @@ void create_thread_auto(void) {
 void pthread_cancel_auto(void) {
     pthread_cancel(thread3);
 }
+
+
+
+
+
+
 
 

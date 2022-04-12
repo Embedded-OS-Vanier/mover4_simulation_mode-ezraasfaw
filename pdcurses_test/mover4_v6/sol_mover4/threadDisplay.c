@@ -19,6 +19,8 @@
 *
 *	Ezra-Fikru Asfaw    3/4/2022         6.0      Completed main function of taskAuto.c.
 *                                                 Need to fix auto/manual printing state.
+* 
+*   Ezra-Fikru Asfaw    4/12/2022        7.0      Completed circle. Having issue to build on beaglebone.
 *****************************************************************************/
 
 

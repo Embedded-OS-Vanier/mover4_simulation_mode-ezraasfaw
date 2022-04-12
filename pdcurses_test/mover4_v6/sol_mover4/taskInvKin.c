@@ -27,13 +27,13 @@
 #include <pthread.h>
 
 static pthread_t thread4;
+static kin_f angles;
 
 static void* thread_invKey(void* threadid) {
-	kin_f angles;
+	delay_ms(20);
 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
-
 	while (1) {
-	
+	 delay_ms(20);
 		circle_yz_plane();
 
 	/*angles = to_angle(10, 10, 15, -45);
@@ -62,4 +62,33 @@ void create_thread_invkey(void) {
 
 void pthread_cancel_invkey(void) {
 	pthread_cancel(thread4);
+}
+
+void circle_yz_plane(void) {
+	int ang45;
+	
+	double y, z;
+
+		for ( ang45 = 0; ang45 <= 315; ang45 += 45) {
+
+
+			z = (RADIUS * cos(to_radians(ang45))) + OFFSET_Z;
+			y = (RADIUS * sin(to_radians(ang45))) + OFFSET_Y;
+
+			angles = to_angle(X0, y, z, -40);
+			move_until(angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
+			delay_ms(100);
+
+
+
+			set_gripper(GRIP_OPEN);														
+			delay_ms(1000);																
+			set_gripper(GRIP_CLOSE);													
+			delay_ms(1000);
+		}
+
+
+
+
+
 }

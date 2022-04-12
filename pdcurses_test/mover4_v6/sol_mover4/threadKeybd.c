@@ -51,18 +51,18 @@
 #include <pthread.h>
 
 /*Globals*/
-static void* thread_kd(void* threadid);
 static pthread_t thread1;
 static pthread_mutex_t mutex_xy = PTHREAD_MUTEX_INITIALIZER;
 
 static void* thread_kd(void* threadid) {     // Retrieve keyboard input
 
     int temp_bse = 0, temp_shl = 0, temp_elb = 0, temp_wrt = 0;
-    int input;
+    char input;
 
     while (1) {
+        delay_ms(10);
         input = getch();  // Blocking queue 
-        delay_ms(20);
+        
         temp_bse = get_sp_angle(0);
         temp_shl = get_sp_angle(1);
         temp_elb = get_sp_angle(2);
