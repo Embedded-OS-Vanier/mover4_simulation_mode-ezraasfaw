@@ -18,6 +18,7 @@
 *	Serge Hould			15 Jan 2021		v3.0.2	add call init_ncurses()
 *
 *
+* 
 *
  *		Bitrate should be 500000 for Mover4
  *		Command to copile:
@@ -52,6 +53,10 @@
 #include <sys/types.h>
 #include "../header/public.h"
 #include "../header/kinematic.h"
+#include "../mover4_v6/header/public.h"
+#include "/Users/1934089/source/repos/mover4_simulation_mode-ezraasfaw/pdcurses_test/mover4_v6/header/public.h"
+
+
 
 #ifdef _WIN32
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
@@ -79,11 +84,7 @@ int main(int argc, char** argv)
 	pthread_joinControllerRx();
 	pthread_join_kb();
 	pthread_join_display();
-	/*kin_f angles = to_angle(-5.0, 10.0, 23.0, 1);
-	attron(WHITE_BLACK);
-	mvprintw(23, 0, "A0: %.2f | 1: %.2f | 2: %.2f | 3: %.2f", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
-	attroff(WHITE_BLACK);
-	refresh();*/
+
 
 
 	

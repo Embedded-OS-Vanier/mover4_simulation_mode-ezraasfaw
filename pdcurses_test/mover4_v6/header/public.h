@@ -1,9 +1,29 @@
 /****************************************************************************
 *	public.h
-* 	Contains all public functions created by the student
+*
 *
 *	Author				Date			Version
-*	
+*   Ezra-Fikru Asfaw    1/28/2022        1.0      Worked and completed the menu
+*
+*	Ezra-Fikru Asfaw    2/04/2022        2.0      Worked and completed snake
+*                                                 mouvement
+*
+*	Ezra-Fikru Asfaw    2/11/2022        3.0      Completed threadDisplay.c
+*                                                 Worked on the counter, and
+*                                                 blinking the title of the game.
+*
+*	Ezra-Fikru Asfaw    2/18/2022        4.0      modified threadDisplay.c to work
+*                                                 with the robot arm.
+*
+*	Ezra-Fikru Asfaw    2/25/2022        5.0      Completed threadKeybd.c and threadDisplay.c
+*                                                 for manual mode.
+*
+*	Ezra-Fikru Asfaw    3/4/2022         6.0      Completed main function of taskAuto.c.
+*                                                 Need to fix auto/manual printing state.
+*
+*   Ezra-Fikru Asfaw    4/12/2022        7.0      Completed circle. Having issue to build on beaglebone.
+*
+*   Ezra-Fikru Asfaw    4/15/2022        8.0      Was able to figure out my problem in the build file and was able to sucessfully demo the lab.
 *
 *****************************************************************************/
 //

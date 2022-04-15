@@ -21,6 +21,9 @@
 *                                                 Need to fix auto/manual printing state.
 * 
 *   Ezra-Fikru Asfaw    4/12/2022        7.0      Completed circle. Having issue to build on beaglebone.
+* 
+*   Ezra-Fikru Asfaw    4/15/2022        8.0      Was able to figure out my problem in the build file and was able to sucessfully demo the lab.
+* 
 *****************************************************************************/
 
 
@@ -77,19 +80,12 @@ void printstr(int row, int col, char* str) {
 }
 
 static void* thread_display(void* threadid) {
-    //static menu section
-    #include "../header/kinematic.h"
-
-
-    //kin_f angles = to_angle(-5, 10, 23, 10);
-    //mvprintw(23, 0, "A0: %.2f        1: %.2f     2: %.2f     3: %.2f                            ", angles.data[0], angles.data[1], angles.data[2], angles.data[3]);
-
-  /*  kin_i cart = to_cart(116.56, 10.96, 18.41, 60.62);
-    mvprintw(24, 0, "C0: %.2f        1: %.2f     2: %.2f     3: %.2f                            ", cart.data[0], cart.data[1], cart.data[2], cart.data[3]);*/
+    
+    
 
 
 
-
+    // menu key selection 
     attron(WHITE_BLACK);
     mvprintw(0, 0, "******************************************************************************");
     mvprintw(1, 0, "            * Use the following keys to jog the joints or grip *              ");
@@ -104,7 +100,7 @@ static void* thread_display(void* threadid) {
     while (1) {
         delay_ms(20);
         attron(GREEN_BLACK);
-
+        // display sp angles values for each joints
         mvprintw(6, 0, "*************************************SP***************************************");
         mvprintw(7, 0, "Base: %3.2f                                                                    ", get_sp_angle(0));
         mvprintw(8, 0, "Shoulder: %3.2f                                                                ", get_sp_angle(1));
@@ -113,6 +109,7 @@ static void* thread_display(void* threadid) {
         mvprintw(11, 0, "******************************************************************************");
         attroff(GREEN_BLACK);
 
+        // display curr angles values for each joints
         attron(BLUE_BLACK);
         mvprintw(12, 0, "*************************************PV***************************************");
         mvprintw(13, 0, "Base: %3.2f                                                                    ", get_curr_angle(0));
@@ -122,6 +119,7 @@ static void* thread_display(void* threadid) {
         mvprintw(17, 0, "******************************************************************************");
         attroff(BLUE_BLACK);
 
+        // display section for error messages
         attron(RED_BLACK);
         mvprintw(18, 0, "************************************CONSOLE***********************************");
         attroff(RED_BLACK);

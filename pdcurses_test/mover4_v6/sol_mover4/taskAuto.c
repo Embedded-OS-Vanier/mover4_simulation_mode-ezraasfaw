@@ -59,8 +59,6 @@
 #define SIMULATION
 static void* thread_auto(void* threadid);
 static pthread_t thread3;
-//static pthread_mutex_t mutex_print = PTHREAD_MUTEX_INITIALIZER;
-//int readADC(unsigned int pin);
 
 
 static void* thread_auto(void* threadid) {
@@ -88,28 +86,18 @@ static void* thread_auto(void* threadid) {
 
         if (sensor >= 2000) {
             angleZero(ZERO);
-            //anglePosition1(GRIP_OPEN, GRIP_CLOSE);
-            set_gripper(GRIP_OPEN); // Intial state of the gripper
+            set_gripper(GRIP_OPEN); 
             move_until(BASE1, SHLD1, ELBW1, WRST1);
-            set_gripper(GRIP_CLOSE); // Finale state of the gripper
+            set_gripper(GRIP_CLOSE); 
 
             angleZero(ZERO);
-            //anglePosition2(GRIP_CLOSE, GRIP_OPEN);
             set_gripper(GRIP_CLOSE);
             move_until(BASE2, SHLD2, ELBW2, WRST2);
             set_gripper(GRIP_OPEN);
 
         }
 
-        /*else if ((sensor >= 2100) && (sensor <= 2222)) {
-            anglePosition2(GRIP_OPEN, GRIP_CLOSE);
-            angleZero();
-            anglePosition1(GRIP_CLOSE, GRIP_OPEN);
 
-        }*/
-       /* else {
-            angleZero(ZERO);
-        }*/
         return NULL;
 
     }
@@ -125,26 +113,7 @@ void angleZero(int ang) {
 }
 
 
-void anglePosition1(int gripint, int gripfinal) {
-    set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, BASE1); // Set angle of Base
-    set_sp_angle(1, SHLD1); // Set angle of Shoulder
-    set_sp_angle(2, ELBW1); // Set angle of Elbow
-    set_sp_angle(3, WRST1); // Set angle of Wrist
-    set_gripper(gripfinal);  // Final state of the gripper
-    move_until(BASE1, SHLD1, ELBW1, WRST1);
-}
 
-
-void anglePosition2(int gripint, int gripfinal) {
-    set_gripper(gripint); // Intial state of the gripper
-    set_sp_angle(0, BASE2); // Set angle of Base
-    set_sp_angle(1, SHLD2); // Set angle of Shoulder
-    set_sp_angle(2, ELBW2); // Set angle of Elbow
-    set_sp_angle(3, WRST2); // Set angle of Wrist
-    set_gripper(gripfinal);  // Final state of the gripper
-    move_until(BASE2, SHLD2, ELBW2, WRST2);
-}
 
 void move_until(double base, double shld, double elbow, double wrist) {
 
@@ -158,10 +127,10 @@ void move_until(double base, double shld, double elbow, double wrist) {
 
     while (1) {
 
-        error_base = get_curr_angle(0) - base;
-        error_shld = get_curr_angle(1) - shld;
-        error_elb = get_curr_angle(2) - elbow;
-        error_wrt = get_curr_angle(3) - wrist;
+        error_base = get_curr_angle(0) - base; // get current angle of Base
+        error_shld = get_curr_angle(1) - shld; // get current angle of Shoulder
+        error_elb = get_curr_angle(2) - elbow; // get current angle of Elbow
+        error_wrt = get_curr_angle(3) - wrist; // get current angle of Wrist
         
         
         

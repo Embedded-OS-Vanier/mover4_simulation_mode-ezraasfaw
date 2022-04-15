@@ -83,15 +83,16 @@ static void* thread_kd(void* threadid) {     // Retrieve keyboard input
         else if (input == 't') set_gripper(GRIP_OPEN); // Enable and open gripper
         else if (input == 'g') set_gripper(GRIP_CLOSE);  // Enable and close gripper
 
-        else if (input == 'j') { 
+        else if (input == 'j') { // cancel all automatic thread movements (auto and inversekinematic)
             mvprintw(22, 0, "************************************MANUAL************************************");
-            pthread_cancel_auto();
+            pthread_cancel_auto(); 
+            pthread_cancel_invkey();
         }
 
-        else if (input == 'n') {
+        else if (input == 'n') { //run automatic thread
             create_thread_auto();
         }
-        else if (input == 'k') {
+        else if (input == 'k') {//run inversekinematic thread
             mvprintw(22, 0, "************************************invKey************************************");
             create_thread_invkey();
         }
